@@ -1,4 +1,5 @@
 const user_key = "user_key";
+const users_list_key = "user_list_key"
 
 /**
  * @typedef {Object} User
@@ -46,6 +47,7 @@ const userStore = {
   mutations: {
     createUser(state, user) {
       state.users.push(user)
+      localStorage.setItem(users_list_key, JSON.stringify(state.users))
     },
     setCurrent(state, current) {
       state.current = current

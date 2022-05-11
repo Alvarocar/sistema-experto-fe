@@ -1,21 +1,21 @@
 <template>
   <main-layout>
     <main class="content">
-      <form>
+      <form @submit.prevent="onSubmit">
         <fieldset>
           <legend>Log-In</legend>
-          <label for="name">
-            Nombre
-            <input type="text" id="name" />
-          </label>
           <label for="email">
             Correo
-            <input type="email" id="email" />
+            <input type="email" v-model="user.email" id="email" required/>
+          </label>
+          <label for="pass">
+            Contrase&ntilde;a
+            <input type="password" v-model="user.password" id="pass" required/>
           </label>
         </fieldset>
         <section class="form-buttons">
           <router-link class="submit btn-redirect" :to="{name:  'SignUp'}"><span>Registro</span></router-link>
-          <button class="submit"><span>Entrar</span></button>
+          <button class="submit" ><span>Entrar</span></button>
         </section>
       </form>
     </main>
@@ -24,8 +24,26 @@
 
 <script>
 import MainLayout from "../layouts/MainLayout";
+import { mapActions } from "vuex";
 export default {
   name: "LogIn",
+  data() {
+    return {
+      user: {
+        email: '',
+        password: '',
+      }
+    }
+  },
+  methods: {
+    onSubmit() {
+      this.logIn(this.user)
+      this.$router.push({ name: 'Home' })
+    },
+    ...mapActions({
+      logIn: 'logIn'
+    }),
+  },
   components: {
     MainLayout,
   },

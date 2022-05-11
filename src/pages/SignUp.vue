@@ -48,6 +48,7 @@ export default {
       onSubmit() {
           console.log(this.send)
           this.send(this.user)
+          this.$router.push({ name: 'LogIn' })
       }
   },
   components: {
