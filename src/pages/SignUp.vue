@@ -1,21 +1,25 @@
 <template>
   <main-layout>
     <main class="content">
-      <form>
+      <form @submit.prevent="onSubmit">
         <fieldset>
-          <legend>Log-In</legend>
+          <legend>Registro</legend>
           <label for="name">
             Nombre
-            <input type="text" id="name" />
+            <input v-model="user.name" type="text" id="name" required/>
           </label>
           <label for="email">
             Correo
-            <input type="email" id="email" />
+            <input type="email" id="email" v-model="user.email" required/>
+          </label>
+          <label for="pass">
+            Contrase&ntilde;a
+            <input type="password" id="pass" v-model="user.password" required/>
           </label>
         </fieldset>
         <section class="form-buttons">
-          <router-link class="submit btn-redirect" :to="{name:  'SignUp'}"><span>Registro</span></router-link>
-          <button class="submit"><span>Entrar</span></button>
+            <router-link class="submit btn-redirect" :to="{name: 'LogIn'}"><span>Log-In</span></router-link>
+            <button class="submit"><span>Registarse</span></button>
         </section>
       </form>
     </main>
@@ -24,8 +28,28 @@
 
 <script>
 import MainLayout from "../layouts/MainLayout";
+import { mapActions } from "vuex";
+
 export default {
-  name: "LogIn",
+  name: "SignUp",
+  data() {
+      return {
+          user: {
+              name: '',
+              email: '',
+              password: '',
+          }
+      }
+  },
+  methods: {
+      ...mapActions({
+          send: 'signUp'
+      }),
+      onSubmit() {
+          console.log(this.send)
+          this.send(this.user)
+      }
+  },
   components: {
     MainLayout,
   },
@@ -93,9 +117,6 @@ fieldset label > input:focus {
   opacity: .9;
   
 }
-
-
-
 
 .submit::before {
   content: "";

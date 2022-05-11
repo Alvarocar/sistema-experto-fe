@@ -11,7 +11,7 @@ import { mapState } from "vuex";
 export default {
   name: "Ask",
   computed: mapState({
-    user: (state) => state.user,
+    user: (state) => state.user.current,
   }),
 };
 </script>
