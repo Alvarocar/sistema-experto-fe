@@ -38,7 +38,9 @@ export default {
   methods: {
     onSubmit() {
       this.logIn(this.user)
-      this.$router.push({ name: 'Home' })
+      .then(() => {
+        this.$router.push({ name: 'Home' })
+      })
     },
     ...mapActions({
       logIn: 'logIn'

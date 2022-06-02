@@ -2,7 +2,8 @@ import store from '../../store'
 
 export const isAuth = (to, _, next) => {
     //If is null or undefined
-    if (!store.state.user.current.name) {
+    const key = localStorage.getItem('user_token')
+    if (!key) {
         next({name: 'LogIn'})
         return
     }

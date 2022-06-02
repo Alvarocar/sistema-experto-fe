@@ -6,7 +6,7 @@
           <legend>Registro</legend>
           <label for="name">
             Nombre
-            <input v-model="user.name" type="text" id="name" required/>
+            <input v-model="user.fullname" type="text" id="name" required/>
           </label>
           <label for="email">
             Correo
@@ -35,7 +35,7 @@ export default {
   data() {
       return {
           user: {
-              name: '',
+              fullname: '',
               email: '',
               password: '',
           }
@@ -48,7 +48,9 @@ export default {
       onSubmit() {
           console.log(this.send)
           this.send(this.user)
-          this.$router.push({ name: 'LogIn' })
+          .then(t => {
+            this.$router.push({ name: 'Home' })
+          })
       }
   },
   components: {
